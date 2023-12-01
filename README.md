@@ -1,24 +1,26 @@
 # I491E.Visual_Question_Answering
-Step1: Setup environment
+Step 1: Setup environment
 ```console
 pip install -r requirement.txt
 ```
-Step2: Load Data
-You must to download dataset from Kaggle links: https://www.kaggle.com/competitions/jaisti491evisualquestionanswering/data
+Step 2: Load Data
+You must to download data from Kaggle links: https://www.kaggle.com/competitions/jaisti491evisualquestionanswering/data. 
 
-## Getting Started!
-# Inference for final submission
+Step 3: Download the fine-tuned model
+
+# Getting Started!
+## Inference for final submission
 ```console
 python src/ensemble.py \
     --eval-data ../data/test_data/test_data/ \
     --vilt-model ../model/baselineViLT/checkpoint-68000 \
     --vilt-output ../results/vilt.csv \
     --blip-model ../model/BLIPAug2/checkpoint_31 \
-    --blip-output results/blipAugTest.csv \
+    --blip-output ../results/blipAugTest.csv \
     --output-file ../results/ensemble.csv
 ```
 
-# Where:
+## Where:
 ```console
 --eval-data: is path link to testing set
 --vilt-model: is path linked to ViLT checkpoint
@@ -26,27 +28,30 @@ python src/ensemble.py \
 --blip-model: is path linked to ViLT checkpoint
 --blip-output: is output of BLIP model
 --output-file
+```
 
-## Fine-tune a ViLT model!
+### Fine-tune a new ViLT model!
 ```console
 $python hyper_train.py
 ```
 
-## Fine-tune a BLIP model!
-Step1: Enrich Training data
+### Fine-tune a new BLIP model!
+Step 1: Enrich Training data
 ```console
 You can run the notebook $notebook/Augmentation.ipynb
 ```
 
-Step2: Fine-tune the BLIP model
+Step 2: Fine-tune the BLIP model
 ```console
 $python src/fine_tune.py --model-dir ../model/BLIPAug/ --epoch 100 --cache-dir ~/.cache --train-json data/train_full.jsonl
 ```
 
-Step3: Inference the test set
+Step 3: Inference the test set
 ```console
 $python src/blip2_inference.py \
     --ckpt-dir ../model/test/best_checkpoint \
     --eval-data ../data/test_data/test_data/ \
     --output ../results/blipAugTest.csv --cache-dir ~/.cache
 ```
+
+If have any issues, please feel free contact to me via email at congnhm@jaist.ac.jp!
