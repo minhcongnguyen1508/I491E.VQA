@@ -91,9 +91,9 @@ model = ViltForQuestionAnswering.from_pretrained(
 )
 
 training_args = TrainingArguments(
-    output_dir="model/vilt_hyper",
+    output_dir="../model/baselineViLT",
     per_device_train_batch_size=32,
-    num_train_epochs=10,
+    num_train_epochs=100,
     save_steps=200,
     logging_steps=200,
     learning_rate=1e-3,
@@ -120,7 +120,7 @@ trainer = Trainer(
 trainer.train()
 
 # prepare image + question
-eval_dir = os.path.abspath("data/test_data/test_data/")
+eval_dir = os.path.abspath("../data/test_data/test_data/")
 eval_data = {}
 for it in listdir(eval_dir):
     eval_data.update({it: []})
@@ -153,7 +153,7 @@ for id in eval_data:
 
 import csv
 
-with open('result.csv', 'w', newline='') as csvfile:
+with open('../results/vilt.csv', 'w', newline='') as csvfile:
     fieldnames = ['ID', 'Label']
     writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
 
