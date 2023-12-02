@@ -18,6 +18,7 @@ python src/ensemble.py \
     --blip-model ./model/BLIPAug2/checkpoint_31 \
     --blip-output ./results/blipAugTest.csv \
     --output-file ./results/ensemble.csv
+    --cache-dir ~/.cache
 ```
 
 ## Where:
